@@ -3,12 +3,14 @@ package main
 import (
 	"net/http"
 
-	api "github.com/golang-api/internal"
-	"github.com/gorilla/mux"
+	"github.com/alexon1234/golang-api/pkg/server"
+	"github.com/alexon1234/golang-api/pkg/storage"
 )
 
 func main() {
-	r := mux.NewRouter()
-	r.Handle("/posts", api.NewPostHandler())
-	http.ListenAndServe(":8000", r)
+
+	repo := storage.NewPostRepository()
+	s := server.New(repo)
+
+	http.ListenAndServe(":8000", s.Router())
 }
