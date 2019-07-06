@@ -10,4 +10,6 @@ type Post struct {
 // Repository - interface of the Post Repository
 type Repository interface {
 	FetchPosts() (*[]Post, error)
+	RunMigrations()
+	CreatePost(post *Post) error
 }

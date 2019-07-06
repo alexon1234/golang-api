@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
 
 	post "github.com/alexon1234/golang-api/pkg"
@@ -24,6 +25,7 @@ func New(repo post.Repository) Server {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/posts", a.fetchPosts).Methods(http.MethodGet)
+	r.HandleFunc("/posts", a.createPost).Methods(http.MethodPost)
 
 	a.router = r
 	return a
@@ -33,9 +35,22 @@ func (a *api) Router() http.Handler {
 	return a.router
 }
 
+func (a *api) createPost(w http.ResponseWriter, r *http.Request) {
+	var post post.Post
+	data, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+	}
+	json.Unmarshal(data, &post)
+	a.repository.CreatePost(&post)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+}
+
 func (a *api) fetchPosts(w http.ResponseWriter, r *http.Request) {
-	gophers, _ := a.repository.FetchPosts()
+	posts, _ := a.repository.FetchPosts()
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(gophers)
+	json.NewEncoder(w).Encode(posts)
 }

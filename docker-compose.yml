@@ -5,11 +5,29 @@ services:
   db:
     image: postgres
     restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+      - ./postgresql-initdb.d:/docker-entrypoint-initdb.d
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "api"
+    ports:
+      - 5432:5432
+    networks: 
+      - bridge
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 5050:8080
+    networks: 
+      - bridge
+
+networks:
+  bridge:
+    driver: bridge 
+    
+volumes:
+  db_volume:

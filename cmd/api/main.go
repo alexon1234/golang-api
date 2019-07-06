@@ -10,6 +10,8 @@ import (
 func main() {
 
 	repo := storage.NewPostRepository()
+	repo.RunMigrations()
+
 	s := server.New(repo)
 
 	http.ListenAndServe(":8000", s.Router())
