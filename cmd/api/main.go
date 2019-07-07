@@ -3,16 +3,10 @@ package main
 import (
 	"net/http"
 
-	"github.com/alexon1234/golang-api/pkg/server"
-	"github.com/alexon1234/golang-api/pkg/storage"
+	"github.com/alexon1234/golang-api/pkg"
 )
 
 func main() {
-
-	repo := storage.NewPostRepository()
-	repo.RunMigrations()
-
-	s := server.New(repo)
-
+	s := pkg.New()
 	http.ListenAndServe(":8000", s.Router())
 }

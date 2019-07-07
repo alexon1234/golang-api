@@ -1,4 +1,4 @@
-package post
+package domain
 
 // Post - Domain of the post
 type Post struct {
@@ -9,7 +9,8 @@ type Post struct {
 
 // Repository - interface of the Post Repository
 type Repository interface {
-	FetchPosts() (*[]Post, error)
 	RunMigrations()
+	FetchPosts() (*[]Post, error)
+	GetPost(id string) (*Post, error)
 	CreatePost(post *Post) error
 }

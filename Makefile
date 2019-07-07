@@ -14,7 +14,8 @@ build: ## Buid application
 	go mod vendor
 	go build -o bin/api/main.exe cmd/api/main.go
 
-run: ## Run application
+serve: ## Run development
+	go build -o bin/api/main.exe cmd/api/main.go
 	./bin/api/main.exe
 
 test:  ## Test application
