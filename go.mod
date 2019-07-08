@@ -5,7 +5,10 @@ go 1.12
 require (
 	cloud.google.com/go v0.41.0 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20190707035753-2be1aa521ff4 // indirect
+	github.com/friendsofgo/graphiql v0.2.2
 	github.com/gorilla/mux v1.7.3
+	github.com/graphql-go/graphql v0.7.8
+	github.com/graphql-go/handler v0.2.3
 	github.com/jinzhu/gorm v1.9.10
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
 	golang.org/x/exp v0.0.0-20190627132806-fd42eb6b336f // indirect

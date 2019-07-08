@@ -2,9 +2,9 @@ package domain
 
 // Post - Domain of the post
 type Post struct {
-	ID    string `json:"ID"`
-	Title string `json:"Title"`
-	Body  string `json:"Body"`
+	ID    string `json:"id"`
+	Title string `json:"title"`
+	Body  string `json:"body"`
 }
 
 // Repository - interface of the Post Repository
